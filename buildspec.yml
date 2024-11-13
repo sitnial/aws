@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17  # Or any other version you need, like corretto11
+    commands:
+      - echo Installing dependencies...
+      - mvn install -DskipTests=true  # Install dependencies without running tests
+  pre_build:
+    commands:
+      - echo Pre-build phase
+      - mvn compile  # Compile the code
+  build:
+    commands:
+      - echo Build phase
+      - mvn package  # Build the project and package it into a JAR/WAR
+  post_build:
+    commands:
+      - echo Post-build phase
+      - mvn test  # Run tests
+
+artifacts:
+  files:
+    - target/*.jar  # Adjust as needed for your build output
+
+cache:
+  paths:
+    - ~/.m2/**/*  # Cache Maven dependencies
