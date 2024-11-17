@@ -11,6 +11,7 @@
 	<groupId>com.sitnial</groupId>
 	<artifactId>aws</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>ImageGallery</name>
 	<description>AWS Image Gallery</description>
 	<url/>

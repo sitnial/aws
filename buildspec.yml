@@ -9,8 +9,10 @@ phases:
       - mvn clean install
   pre_build:
     commands:
-      - echo Pre-build phase
-      - mvn compile  # Compile the code
+      - echo Pre-build phase # Compile the code
+      - mvn compile
+      - echo "Creating ZIP file"
+      - zip -r ImageGallery.zip target/*
   build:
     commands:
       - echo Build phase
@@ -19,10 +21,14 @@ phases:
     commands:
       - echo Post-build phase
       - mvn test  # Run tests
+      - echo "Uploading ZIP file to S3"
+      - aws s3 cp aws-0.0.1-SNAPSHOT.zip s3://codepipeline-eu-north-1-205292741497/aws-0.0.1-SNAPSHOT.zip
+
 
 artifacts:
   files:
     - target/*.jar  # Adjust as needed for your build output
+    - aws-0.0.1-SNAPSHOT.zip
 
 cache:
   paths:

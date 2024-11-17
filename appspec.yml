@@ -1,0 +1,36 @@
+version: 0.0
+os: linux
+files:
+  # Указываем, какие файлы нужно скопировать на сервер.
+  # Обычно это JAR файл, созданный в процессе сборки Maven.
+  - source: target/aws-0.0.1-SNAPSHOT.jar
+    destination: /home/ec2-user/app/aws-0.0.1-SNAPSHOT.jar
+
+# В данном случае мы указываем, что на EC2 сервере будет использоваться JAR файл.
+# Следующий шаг это указание команд для запуска приложения.
+
+hooks:
+  # На этапе BeforeInstall можно выполнить, например, удаление старого артефакта.
+  BeforeInstall:
+    - location: scripts/before_install.sh
+      runas: root
+
+  # На этапе Install будет запускаться JAR файл.
+  Install:
+    - location: scripts/install.sh
+      runas: ec2-user
+
+  # После установки можно выполнить дополнительные команды.
+  AfterInstall:
+    - location: scripts/after_install.sh
+      runas: ec2-user
+
+  # Указываем команду для запуска приложения.
+  ApplicationStart:
+    - location: scripts/start_application.sh
+      runas: ec2-user
+
+  # Когда развертывание завершено, можно выполнить проверку состояния.
+  ValidateService:
+    - location: scripts/validate_service.sh
+      runas: ec2-user
