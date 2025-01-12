@@ -70,20 +70,24 @@
 				<executions>
 					<execution>
 						<id>make-zip</id>
-						<phase>package</phase>
+						<phase>package</phase> <!-- Этап, на котором выполняется создание архива -->
 						<goals>
-							<goal>single</goal>
+							<goal>single</goal> <!-- Цель - создать единственный архив -->
 						</goals>
 						<configuration>
+							<!-- Создание ZIP архива с зависимостями -->
 							<archive>
 								<manifest>
 									<mainClass>com.sitnial.Application</mainClass> <!-- Укажите ваш главный класс -->
 								</manifest>
 							</archive>
+							<!-- Использование стандартного шаблона для архива с зависимостями -->
 							<descriptorRefs>
 								<descriptorRef>jar-with-dependencies</descriptorRef>
 							</descriptorRefs>
+							<!-- Задание имени финального архива -->
 							<finalName>aws-0.0.1-SNAPSHOT</finalName>
+							<!-- Исключение добавления ID сборки в имя архива -->
 							<appendAssemblyId>false</appendAssemblyId>
 						</configuration>
 					</execution>
