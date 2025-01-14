@@ -1,18 +1,5 @@
 version: 0.0
 os: linux
 files:
-  - source: aws-0.0.1-SNAPSHOT.zip
-    destination: /home/ec2-user/app
-hooks:
-  BeforeInstall:
-    - location: scripts/cleanup.sh
-      timeout: 300
-      runas: ec2-user
-  AfterInstall:
-    - location: scripts/start-server.sh
-      timeout: 300
-      runas: ec2-user
-  ApplicationStop:
-    - location: scripts/stop-server.sh
-      timeout: 300
-      runas: ec2-user
+  - source: aws-0.0.1-SNAPSHOT.jar
+    destination: /home/ec2-user/my-application
