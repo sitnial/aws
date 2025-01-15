@@ -15,14 +15,13 @@ phases:
     commands:
       - echo Build phase
       - echo "Creating ZIP file from JAR"
-      - zip -r target/aws-0.0.1-SNAPSHOT.zip target/aws-0.0.1-SNAPSHOT.jar  # Создание ZIP архива из JAR файла
+      - zip -r target/aws-0.0.1-SNAPSHOT.zip target/ appspec.yml scripts/ # Упаковываем все нужные папки и файлы
       - ls -l target  # Проверка существования ZIP файла
   post_build:
     commands:
       - echo Post-build phase
       - echo "Uploading ZIP file to S3"
       - aws s3 cp target/aws-0.0.1-SNAPSHOT.zip s3://codepipeline-eu-north-1-205292741497/aws-0.0.1-SNAPSHOT.zip
-
 
 artifacts:
   files:
